@@ -35,6 +35,7 @@ import operator
 
 import numpy as np
 
+from wordcloud import WordCloud
 
 # In[2]:
 
@@ -251,6 +252,14 @@ plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
 plt.show()
 
 
+#WordCloud MACRI
+wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).generate(' '.join((palabras_macri_filtradas)))
+plt.figure()
+plt.imshow(wc,interpolation='bilinear')
+plt.axis("off")
+plt.show()
+
+
 # In[11]:
 
 
@@ -285,6 +294,12 @@ plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
 plt.show()
 
+#WordCloud STOLBIZER
+wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).generate(' '.join((palabras_stolbizer_filtradas)))
+plt.figure()
+plt.imshow(wc,interpolation='bilinear')
+plt.axis("off")
+plt.show()
 
 # In[12]:
 
@@ -320,6 +335,12 @@ plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
 plt.show()
 
+#WordCloud MASSA
+wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).generate(' '.join((palabras_massa_filtradas)))
+plt.figure()
+plt.imshow(wc,interpolation='bilinear')
+plt.axis("off")
+plt.show()
 
 # In[13]:
 
@@ -353,6 +374,14 @@ resultado.reverse()
 x = np.arange(50)
 plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
+plt.show()
+
+
+#WordCloud DEL CAÑO 
+wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).generate(' '.join((palabras_delcano_filtradas)))
+plt.figure()
+plt.imshow(wc,interpolation='bilinear')
+plt.axis("off")
 plt.show()
 
 
@@ -390,6 +419,13 @@ plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
 plt.show()
 
+
+#WordCloud RODRIGUEZ SAÁ
+wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).generate(' '.join((palabras_rodriguezsaa_filtradas)))
+plt.figure()
+plt.imshow(wc,interpolation='bilinear')
+plt.axis("off")
+plt.show()
 
 # In[15]:
 
