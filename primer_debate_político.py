@@ -7,7 +7,7 @@
 #Importar modulo de lectura de pypdf
 from PyPDF2 import PdfFileReader
 
-from legibilidad import legibilidad
+import legibilidad
 
 import re, string, unicodedata
 # NLTK
