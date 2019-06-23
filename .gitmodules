@@ -1,0 +1,9 @@
+[submodule "legibilidad"]
+	path = legibilidad
+	url = https://github.com/amunozf/legibilidad
+[submodule "separasilabas"]
+	path = separasilabas
+	url = https://github.com/amunozf/separasilabas
+[submodule "cifra-a-texto"]
+	path = cifra-a-texto
+	url = https://github.com/amunozf/cifra-a-texto
