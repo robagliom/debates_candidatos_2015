@@ -7,6 +7,8 @@
 #Importar modulo de lectura de pypdf
 from PyPDF2 import PdfFileReader
 
+from legibilidad import legibilidad
+
 import re, string, unicodedata
 # NLTK
 # kit de herramientas de lenguaje natural
@@ -123,6 +125,7 @@ plt.pie(sizes, labels=labels, colors=colors,
 autopct='%1.1f%%', shadow=True, startangle=140)
 
 plt.axis('equal')
+plt.title("Porcentaje de las palabras totales dichas por cada candidato")
 plt.show()
 
 
@@ -249,6 +252,7 @@ resultado.reverse()
 x = np.arange(50)
 plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
+plt.title("Histograma de frecuencia absoluta de las palabras dichas por Mauricio Macri")
 plt.show()
 
 
@@ -257,6 +261,7 @@ wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).ge
 plt.figure()
 plt.imshow(wc,interpolation='bilinear')
 plt.axis("off")
+plt.title("Nube de palabras dichas por Mauricio Macri")
 plt.show()
 
 
@@ -292,6 +297,7 @@ resultado.reverse()
 x = np.arange(50)
 plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
+plt.title("Histograma de frecuencia absoluta de las palabras dichas por Margarita Stolbizer")
 plt.show()
 
 #WordCloud STOLBIZER
@@ -299,6 +305,7 @@ wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).ge
 plt.figure()
 plt.imshow(wc,interpolation='bilinear')
 plt.axis("off")
+plt.title("Nube de palabras dichas por Margarita Stolbizer")
 plt.show()
 
 # In[12]:
@@ -333,6 +340,7 @@ resultado.reverse()
 x = np.arange(50)
 plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
+plt.title("Histograma de frecuencia absoluta de las palabras dichas por Sergio Massa")
 plt.show()
 
 #WordCloud MASSA
@@ -340,6 +348,7 @@ wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).ge
 plt.figure()
 plt.imshow(wc,interpolation='bilinear')
 plt.axis("off")
+plt.title("Nube de palabras dichas por Sergio Massa")
 plt.show()
 
 # In[13]:
@@ -374,6 +383,7 @@ resultado.reverse()
 x = np.arange(50)
 plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
+plt.title("Histograma de frecuencia absoluta de las palabras dichas por Nicolás del Caño")
 plt.show()
 
 
@@ -382,6 +392,7 @@ wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).ge
 plt.figure()
 plt.imshow(wc,interpolation='bilinear')
 plt.axis("off")
+plt.title("Nube de palabras dichas por Nicolás del Caño")
 plt.show()
 
 
@@ -417,6 +428,7 @@ resultado.reverse()
 x = np.arange(50)
 plt.bar(x, [i[1] for i in resultado[:50]])
 plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
+plt.title("Histograma de frecuencia absoluta de las palabras dichas por Adolfo Rodríguez Saá")
 plt.show()
 
 
@@ -425,6 +437,50 @@ wc = WordCloud(width=1000,height=1000,background_color="White",max_words=150).ge
 plt.figure()
 plt.imshow(wc,interpolation='bilinear')
 plt.axis("off")
+plt.title("Nube de palabras dichas por Adolfo Rodríguez Saá")
+plt.show()
+
+#TEST LEGIBILIDAD CANDIDATOS
+results = {"Macri":{},"Stolbizer":{},"Massa":{},"Del Caño":{},"Rodríguez Saá":{}}
+
+for key in list(results.keys()):
+    results[key]["INFLESZ"] = legibilidad.fernandez_huerta(diccionario[key])
+    results[key]["Szigriszt Pazos"] = legibilidad.szigriszt_pazos(diccionario[key])
+    results[key]["Gutierrez"] = legibilidad.gutierrez(diccionario[key])
+    results[key]["Mu"] = legibilidad.mu(diccionario[key])
+    results[key]["Crawford"] = legibilidad.crawford(diccionario[key])
+
+
+
+rows = [key for key in list(results.keys())]
+columns = [key for key in list(results[rows[0]].keys())]
+data = [[0 for i in range(len(columns))] for j in range(len(rows))]
+
+for r in range(len(rows)):
+    for c in range(len(columns)):
+        data[r][c] = results[rows[r]][columns[c]]
+
+fig=plt.figure()
+ax = plt.gca()
+ax.xaxis.set_visible(False) 
+ax.yaxis.set_visible(False)
+tbl = ax.table(cellText=data,rowLabels=rows,colLabels=columns,loc='center',colWidths=[0.08 for x in columns])
+tbl.scale(0.6*2,1.5*2)
+plt.title("Comparación de complejidad de textos de todos los candidatos por múltiples métodos")
+plt.show()
+
+
+
+data = []
+columns = []
+for key in list(results.keys()):
+    columns.append(key + "\n"+ str(results[key]["INFLESZ"]))
+    data.append(results[key]["INFLESZ"])
+
+plt.figure()
+plt.bar(columns,data)
+plt.title("Análisis de complejidad de texto por método INFLESZ")
+plt.ylim(60,70)
 plt.show()
 
 # In[15]:
