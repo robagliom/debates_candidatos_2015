@@ -7,3 +7,5 @@ Del mismo participaron cinco de los seis candidatos (faltó Daniel Scioli del FP
     Frente de Izquierda y de los Trabajadores: Nicolás del Caño
     Frente Progresistas: Margarita Stolbizer
     Compromiso Federal: Adolfo Rodríguez Saá
+
+Programa principal: primer_debate_político.py
