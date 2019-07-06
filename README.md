@@ -7,6 +7,3 @@ Del mismo participaron cinco de los seis candidatos (faltó Daniel Scioli del FP
     Frente de Izquierda y de los Trabajadores: Nicolás del Caño
     Frente Progresistas: Margarita Stolbizer
     Compromiso Federal: Adolfo Rodríguez Saá
-
-
-Ver: https://github.com/robagliom/debates_candidatos_2015/blob/master/primer_debate_pol%C3%ADtico.ipynb
