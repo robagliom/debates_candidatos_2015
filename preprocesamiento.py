@@ -92,7 +92,7 @@ def leer_archivo_separado():
         texto_i = pagina_i.extractText()
         texto_discurso_6 = texto_discurso_6 + ' ' + texto_i.replace('\n',"")
 
-    #Los nombres de las categorias estan hardcodeados para reconocerlos en el texto, ya que 
+    #Los nombres de las categorias estan hardcodeados para reconocerlos en el texto, ya que
     #la libreria que se utiliza para leer pdfs no reconoce el subrayado que los marca como titulos
 
     #Cada elemento de categorias es una seccion, que contiene:
@@ -104,7 +104,7 @@ def leer_archivo_separado():
 
     #Ejemplo de uso: categorias["Desarrollo económico y humano"]["Diccionario"]["Macri"]
 
-    categorias = {"Introducción": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]}, 
+    categorias = {"Introducción": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
                   "Desarrollo económico y humano": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
                   "Educación e infancia": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
                   "Seguridad y derechos humanos": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
@@ -167,8 +167,6 @@ def leer_archivo_separado():
         categorias[nom_cat]["Diccionario"] =  diccionario
 
     return categorias
-
-
 
 
 #Normalización
