@@ -5,6 +5,7 @@
 from preprocesamiento import *
 from analisis import *
 from test_legibilidad import *
+from matriz_candidatos import *
 ########### Fin módulos ##############
 
 diccionario = leer_archivo() #Módulo específico
@@ -32,7 +33,6 @@ palabras_macri = tokenizacion(diccionario['Macri'])
 plot_palabras_mas_usadas(palabras_macri, 'MACRI')
 #WordCloud MACRI
 plot_wordcloud(palabras_macri, 'MACRI')
-
 
 #ANÁLISIS STOLBIZER
 palabras_stolbizer = tokenizacion(diccionario['Stolbizer'])
@@ -67,3 +67,6 @@ plot_wordcloud(palabras_stolbizer,'RODRÍGUEZ SAÁ')
 
 #TEST LEGIBILIDAD CANDIDATOS
 test_legibilidad(diccionario)
+
+#MATRIZ COMPARACIÓN ENTRE CANDIDATOS
+#matriz_comparativa('Macri',palabras_macri, 'Stolbizer',palabras_stolbizer)

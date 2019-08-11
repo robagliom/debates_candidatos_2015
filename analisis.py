@@ -45,7 +45,8 @@ def plot_palabras_mas_usadas(lista,titulo):
     plt.bar(x, [i[1] for i in resultado[:50]])
     plt.xticks(x, (i[0] for i in resultado[:50]),rotation='vertical')
     plt.show()
-    return plt
+    #mas_usadas = [i[0] for i in resultado[:50]]
+    #return mas_usadas#plt
 
 #WordCloud
 #recibe lista y dato para xlabel
