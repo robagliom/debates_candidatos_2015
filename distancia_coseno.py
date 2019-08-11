@@ -47,9 +47,38 @@ def tabla_coseno(fila,columna,lista,titulo):
     plt.title(titulo)
     plt.show()
 
-    # Removing ticks and spines enables you to get the figure only with table
-    """plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
-    plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
-    for pos in ['right','top','bottom','left']:
-        plt.gca().spines[pos].set_visible(False)
-    plt.savefig('tabla_cosenos.png', bbox_inches='tight', pad_inches=0.05)"""
+def preprocesamiento_coseno(seccion,titulo):
+    palabras_macri = seccion['Macri']
+    palabras_stolbizer = seccion['Stolbizer']
+    palabras_massa = seccion['Massa']
+    palabras_delcano = seccion['Del Caño']
+    palabras_rodriguezsaa = seccion['Rodríguez Saá']
+
+    dic_seccion = {
+                            'Macri':palabras_macri,
+                            'Stolbizer':palabras_stolbizer,
+                            'Massa':palabras_massa,
+                            'Del Caño':palabras_delcano,
+                            'Rodríguez Saá':palabras_rodriguezsaa,
+                            }
+
+    #DISTANCIA DEL COSENO
+    """combinaciones = combinaciones(list(dic_desarrollo_eco_hum.keys()),2)
+    lista_cosenos =[] #0:candidato 1 || 1: candidato 2 || 2: valor coseno
+    for c in combinaciones:
+        print(c)
+        cosine = get_cosine(dic_desarrollo_eco_hum[c[0]],dic_desarrollo_eco_hum[c[1]])
+        print('Coseno entre {} y {}:'.format(c[0],c[1]), cosine)
+        lista_cosenos.append([c[0],c[1],cosine])"""
+
+    lista_cosenos = [] #Macri | Stolbizer | Massa | Del Caño | Rodríguez Saá
+    for c1 in dic_seccion:
+        lista_aux_cos = []
+        for c2 in dic_seccion:
+            coseno = get_cosine(dic_seccion[c1],dic_seccion[c2])
+            lista_aux_cos.append(coseno)
+        lista_cosenos.append(lista_aux_cos)
+
+    fila =list(dic_seccion.keys())
+    columna = fila
+    tabla_coseno(fila,columna,lista_cosenos,titulo)
