@@ -9,7 +9,6 @@ from matriz_candidatos import *
 from distancia_coseno import *
 from combinaciones import *
 ########### Fin módulos ##############
-"""
 diccionario = leer_archivo() #Módulo específico
 
 for i in diccionario:
@@ -70,7 +69,6 @@ plot_wordcloud(palabras_stolbizer,'RODRÍGUEZ SAÁ')
 #TEST LEGIBILIDAD CANDIDATOS
 #COMENTADO HASTA VER ALGO TEÓRICO QUE JUSTIFIQUE
 #test_legibilidad(diccionario)
-"""
 
 
 ###########################################################
@@ -81,15 +79,19 @@ dicc_por_seccion = leer_archivo_separado()
 ######### SECCIÓN: DESARROLLO ECONÓMICO Y HUMANO ##########
 desarrollo_eco_hum = dicc_por_seccion['Desarrollo económico y humano']['Diccionario']
 preprocesamiento_coseno(desarrollo_eco_hum,"DESARROLLO ECONÓMICO Y HUMANO: similitud candidatos por distancia del coseno")
+matriz_comparativa(desarrollo_eco_hum,"DESARROLLO ECONÓMICO Y HUMANO: palabras compartidas entre candidatos")
 
 ######### SECCIÓN: EDUCACIÓN E INFANCIA ##########
 desarrollo_edu_inf = dicc_por_seccion['Educación e infancia']['Diccionario']
 preprocesamiento_coseno(desarrollo_edu_inf,"EDUCACIÓN E INFANCIA: similitud candidatos por distancia del coseno")
+matriz_comparativa(desarrollo_edu_inf,"EDUCACIÓN E INFANCIA: palabras compartidas entre candidatos")
 
 ######### SECCIÓN: SEGURIDAD Y DERECHOS HUMANOS ##########
 desarrollo_seg_der = dicc_por_seccion['Seguridad y derechos humanos']['Diccionario']
 preprocesamiento_coseno(desarrollo_seg_der,"SEGURIDAD Y DERECHOS HUMANOS: similitud candidatos por distancia del coseno")
+matriz_comparativa(desarrollo_seg_der,"SEGURIDAD Y DERECHOS HUMANOS: palabras compartidas entre candidatos")
 
 ######### SECCIÓN: FORTALECIMIENTO DEMOCRÁTICO ##########
 desarrollo_fort_dem = dicc_por_seccion['Fortalecimiento democrático']['Diccionario']
 preprocesamiento_coseno(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: similitud candidatos por distancia del coseno")
+matriz_comparativa(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: palabras compartidas entre candidatos")
