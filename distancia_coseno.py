@@ -22,7 +22,8 @@ def get_cosine(vec1, vec2):
     if not denominator:
         return 0.0
     else:
-        return round(float(numerator) / denominator,4)
+        #similitud 1-distancia
+        return abs(round(1 - float(numerator) / denominator,4))
 
 def text_to_vector(text):
      words = WORD.findall(text)
