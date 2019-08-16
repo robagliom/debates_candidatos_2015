@@ -12,6 +12,7 @@ from nltk import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import LancasterStemmer, WordNetLemmatizer
 from nltk.probability import FreqDist
+from nltk import tokenize
 
 #Importar modulo de lectura de pypdf
 from PyPDF2 import PdfFileReader
@@ -103,31 +104,24 @@ def leer_archivo_separado():
     #     -el diccionario que se obtendra como resultado del preprocesamiento
 
     #Ejemplo de uso: categorias["Desarrollo económico y humano"]["Diccionario"]["Macri"]
+    nombres_categorias = ["Introducción","Desarrollo económico y humano","Educación e infancia","Seguridad y derechos humanos","Fortalecimiento democrático","Cierre de candidatos"]
+    categorias = {}
+    for n in nombres_categorias:
+        categorias[n] = {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":{},"Oraciones":{}}
 
-    categorias = {"Introducción": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
-                  "Desarrollo económico y humano": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
-                  "Educación e infancia": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
-                  "Seguridad y derechos humanos": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
-                  "Fortalecimiento democrático": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]},
-                  "Cierre de candidatos": {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":[]}}
-
-    #Obtenemos la lista de nombres de categorias
-    keys = list(categorias.keys())
-    for cat in range(len(keys)):
         #para cada categoria obtenemos comienzos y fin
-        nom_cat = keys[cat]
-        categorias[nom_cat]["Comienzo_titulo"] = texto_discurso_6.find(nom_cat)
-        categorias[nom_cat]["Comienzo_sec"] = categorias[nom_cat]["Comienzo_titulo"] + len(nom_cat)
-        if cat == len(categorias) - 1:
-            categorias[nom_cat]["Fin"] = len(texto_discurso_6) - 1
+        categorias[n]["Comienzo_titulo"] = texto_discurso_6.find(n)
+        categorias[n]["Comienzo_sec"] = categorias[n]["Comienzo_titulo"] + len(n)
+        if n == nombres_categorias[-1]:
+            categorias[n]["Fin"] = len(texto_discurso_6) - 1
         else:
-            categorias[nom_cat]["Fin"] = texto_discurso_6.find(keys[cat+1]) - 1
+            categorias[n]["Fin"] = texto_discurso_6.find(nombres_categorias[nombres_categorias.index(n)+1])-1
 
-        #Obtenemos el camo textp, separando el texto segun los comienzos y fines
-        categorias[nom_cat]["Texto"] = texto_discurso_6[categorias[nom_cat]["Comienzo_sec"]:categorias[nom_cat]["Fin"]]
+        #Obtenemos el campo texto, separando el texto segun los comienzos y fines
+        categorias[n]["Texto"] = texto_discurso_6[categorias[n]["Comienzo_sec"]:categorias[n]["Fin"]]
 
         #Realizamos el preprocesamiento necesario
-        t = categorias[nom_cat]["Texto"]
+        t = categorias[n]["Texto"]
         diccionario = dict()
         lista_discurso = t.split()
         iteraciones = len(lista_discurso)
@@ -164,7 +158,11 @@ def leer_archivo_separado():
             for key in diccionario.keys():
                 f.write("%s;%s\n"%(key,diccionario[key]))
 
-        categorias[nom_cat]["Diccionario"] =  diccionario
+        categorias[n]["Diccionario"] =  diccionario
+
+        #Separo discurso por oraciones
+        for candidato in list(categorias[n]["Diccionario"].keys()):
+            categorias[n]["Oraciones"][candidato] =  tokenize.sent_tokenize(categorias[n]["Diccionario"][candidato])
 
     return categorias
 
