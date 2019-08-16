@@ -8,8 +8,9 @@ from test_legibilidad import *
 from matriz_candidatos import *
 from distancia_coseno import *
 from combinaciones import *
+from analisis_sentimiento import *
 ########### Fin módulos ##############
-"""diccionario = leer_archivo() #Módulo específico
+diccionario = leer_archivo() #Módulo específico
 
 for i in diccionario:
     print('Cantidad de palabras dichas por',i,': ',len(diccionario[i]),'\n')
@@ -65,7 +66,7 @@ palabras_rodriguezsaa = tokenizacion(diccionario['Rodríguez Saá'])
 plot_palabras_mas_usadas(palabras_rodriguezsaa,'RODRÍGUEZ SAÁ')
 #WordCloud MACRI
 plot_wordcloud(palabras_stolbizer,'RODRÍGUEZ SAÁ')
-"""
+
 #TEST LEGIBILIDAD CANDIDATOS
 #COMENTADO HASTA VER ALGO TEÓRICO QUE JUSTIFIQUE
 #test_legibilidad(diccionario)
@@ -95,3 +96,8 @@ matriz_comparativa(desarrollo_seg_der,"SEGURIDAD Y DERECHOS HUMANOS: palabras co
 desarrollo_fort_dem = dicc_por_seccion['Fortalecimiento democrático']['Diccionario']
 preprocesamiento_coseno(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: similitud candidatos por distancia del coseno")
 matriz_comparativa(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: palabras compartidas entre candidatos")
+
+
+###########################################################
+################ ANÁLISIS DE SENTIMIENTO ##################
+sentimiento_oraciones(dicc_por_seccion)
