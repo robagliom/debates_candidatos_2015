@@ -242,7 +242,7 @@ def lemmatize_verbs(words):
 
 def remove_adverbios(words):
     print('remove_adverbios')
-    with open('adverbios.txt', 'r') as f:
+    with open('lenguaje_español/adverbios.txt', 'r') as f:
         adverbios = [linea.replace('\n','') for linea in f]
     print(adverbios)
     sin_adverbios = []
@@ -253,7 +253,7 @@ def remove_adverbios(words):
 
 def remove_conjunciones(words):
     print('remove_conjunciones')
-    with open('conjunciones.txt', 'r') as f:
+    with open('lenguaje_español/conjunciones.txt', 'r') as f:
         conjunciones = [linea.replace('\n','') for linea in f]
     print(conjunciones)
     sin_conjunciones = []
@@ -264,7 +264,7 @@ def remove_conjunciones(words):
 
 def remove_preposiciones(words):
     print('remove_preposiciones')
-    with open('preposiciones.txt', 'r') as f:
+    with open('lenguaje_español/preposiciones.txt', 'r') as f:
         preposiciones = [linea.replace('\n','') for linea in f]
     print(preposiciones)
     sin_preposiciones = []
