@@ -240,12 +240,49 @@ def lemmatize_verbs(words):
         lemmas.append(lemma)
     return lemmas
 
+def remove_adverbios(words):
+    print('remove_adverbios')
+    with open('adverbios.txt', 'r') as f:
+        adverbios = [linea.replace('\n','') for linea in f]
+    print(adverbios)
+    sin_adverbios = []
+    for word in words:
+        if not word in adverbios:
+            sin_adverbios.append(word)
+    return sin_adverbios
+
+def remove_conjunciones(words):
+    print('remove_conjunciones')
+    with open('conjunciones.txt', 'r') as f:
+        conjunciones = [linea.replace('\n','') for linea in f]
+    print(conjunciones)
+    sin_conjunciones = []
+    for word in words:
+        if not word in conjunciones:
+            sin_conjunciones.append(word)
+    return sin_conjunciones
+
+def remove_preposiciones(words):
+    print('remove_preposiciones')
+    with open('preposiciones.txt', 'r') as f:
+        preposiciones = [linea.replace('\n','') for linea in f]
+    print(preposiciones)
+    sin_preposiciones = []
+    for word in words:
+        if not word in preposiciones:
+            sin_preposiciones.append(word)
+    return sin_preposiciones
+
 def normalize(words):
+    print('normalize')
     words = remove_non_ascii(words)
     words = to_lowercase(words)
     words = remove_punctuation(words)
     words = replace_numbers(words)
     words = remove_stopwords(words)
+    words = remove_adverbios(words)
+    words = remove_conjunciones(words)
+    words = remove_preposiciones(words)
     return words
 
 def stem_and_lemmatize(words):
