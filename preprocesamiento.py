@@ -178,7 +178,10 @@ def remove_non_ascii(words):
     """Eliminar caracteres no ASCII de la lista de palabras en token"""
     new_words = []
     for word in words:
-        new_word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+        if 'ñ' in word:
+            new_word = word
+        else:
+            new_word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore').decode('utf-8', 'ignore')
         new_words.append(new_word)
     return new_words
 
