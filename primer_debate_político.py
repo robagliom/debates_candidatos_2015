@@ -9,7 +9,7 @@ from matriz_candidatos import *
 from distancia_coseno import *
 from combinaciones import *
 ########### Fin módulos ##############
-"""diccionario = leer_archivo() #Módulo específico
+diccionario = leer_archivo("datos/Version-taquigrafica.pdf") #Módulo específico
 
 for i in diccionario:
     print('Cantidad de palabras dichas por',i,': ',len(diccionario[i]),'\n')
@@ -65,7 +65,7 @@ palabras_rodriguezsaa = tokenizacion(diccionario['Rodríguez Saá'])
 plot_palabras_mas_usadas(palabras_rodriguezsaa,'RODRÍGUEZ SAÁ')
 #WordCloud MACRI
 plot_wordcloud(palabras_stolbizer,'RODRÍGUEZ SAÁ')
-"""
+
 #TEST LEGIBILIDAD CANDIDATOS
 #COMENTADO HASTA VER ALGO TEÓRICO QUE JUSTIFIQUE
 #test_legibilidad(diccionario)
@@ -74,7 +74,7 @@ plot_wordcloud(palabras_stolbizer,'RODRÍGUEZ SAÁ')
 ###########################################################
 ######### ANÁLISIS DISCURSO SEPARADO POR SECCIÓN ##########
 print('** Realizamos análisis separado por sección **')
-dicc_por_seccion = leer_archivo_separado()
+dicc_por_seccion = leer_archivo_separado("datos/Version-taquigrafica.pdf")
 
 ######### SECCIÓN: DESARROLLO ECONÓMICO Y HUMANO ##########
 desarrollo_eco_hum = dicc_por_seccion['Desarrollo económico y humano']['Diccionario']

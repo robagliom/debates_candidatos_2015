@@ -83,3 +83,34 @@ def preprocesamiento_coseno(seccion,titulo):
     fila =list(dic_seccion.keys())
     columna = fila
     tabla_coseno(fila,columna,lista_cosenos,titulo)
+
+
+def preprocesamiento_coseno2(seccion,titulo):
+    palabras_macri = seccion['Macri']
+    palabras_scioli = seccion['Scioli']
+
+    dic_seccion = {
+                            'Macri':palabras_macri,
+                            'Scioli':palabras_scioli,
+                            }
+
+    #DISTANCIA DEL COSENO
+    """combinaciones = combinaciones(list(dic_desarrollo_eco_hum.keys()),2)
+    lista_cosenos =[] #0:candidato 1 || 1: candidato 2 || 2: valor coseno
+    for c in combinaciones:
+        print(c)
+        cosine = get_cosine(dic_desarrollo_eco_hum[c[0]],dic_desarrollo_eco_hum[c[1]])
+        print('Coseno entre {} y {}:'.format(c[0],c[1]), cosine)
+        lista_cosenos.append([c[0],c[1],cosine])"""
+
+    lista_cosenos = [] #Macri | Stolbizer | Massa | Del Caño | Rodríguez Saá
+    for c1 in dic_seccion:
+        lista_aux_cos = []
+        for c2 in dic_seccion:
+            coseno = get_cosine(dic_seccion[c1],dic_seccion[c2])
+            lista_aux_cos.append(coseno)
+        lista_cosenos.append(lista_aux_cos)
+
+    fila =list(dic_seccion.keys())
+    columna = fila
+    tabla_coseno(fila,columna,lista_cosenos,titulo)

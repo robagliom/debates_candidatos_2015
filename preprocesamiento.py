@@ -21,9 +21,9 @@ from PyPDF2 import PdfFileReader
 import inflect #https://pypi.org/project/inflect/
 
 #Devuelve diccionario procesado con datos del discurso
-def leer_archivo():
+def leer_archivo(path):
     #Vamos a leer pdf con el discurso de los 6 candidatos
-    discurso_6_candidatos = PdfFileReader(open("datos/Version-taquigrafica.pdf", "rb"))
+    discurso_6_candidatos = PdfFileReader(open(path, "rb"))
 
 
     #Capturar la cantidad de paginas que tiene el documento
@@ -77,9 +77,9 @@ def leer_archivo():
     return diccionario
 
 
-def leer_archivo_separado():
+def leer_archivo_separado(path):
     #Vamos a leer pdf con el discurso de los 6 candidatos
-    discurso_6_candidatos = PdfFileReader(open("datos/Version-taquigrafica.pdf", "rb"))
+    discurso_6_candidatos = PdfFileReader(open(path, "rb"))
 
 
     #Capturar la cantidad de paginas que tiene el documento
@@ -104,18 +104,52 @@ def leer_archivo_separado():
     #     -el diccionario que se obtendra como resultado del preprocesamiento
 
     #Ejemplo de uso: categorias["Desarrollo económico y humano"]["Diccionario"]["Macri"]
-    nombres_categorias = ["Introducción","Desarrollo económico y humano","Educación e infancia","Seguridad y derechos humanos","Fortalecimiento democrático","Cierre de candidatos"]
+
+    #Definimos los nombres de las categorias a buscar
+    nombres_categorias = ["Introducción",
+                          "Desarrollo económico y humano",
+                          "Educación e infancia",
+                          "Seguridad y derechos humanos",
+                          "Fortalecimiento democrático",
+                          "Cierre de candidatos"]
     categorias = {}
-    for n in nombres_categorias:
+
+    for i in range(len(nombres_categorias)):
+        n = nombres_categorias[i]
         categorias[n] = {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":{},"Oraciones":{}}
+        
+        #Obtenemos el fin de la categoria anterior
+        fin_categoria_anterior = 0
+        if i > 0:
+            fin_categoria_anterior = categorias[nombres_categorias[i-1]]["Fin"]
+
+        #Buscamos la ubicacion del titulo de la categoria en el texto
+        titulo = texto_discurso_6[fin_categoria_anterior:].find(n)
+        if titulo == -1:
+            #Hacemos una excepcion para la categoria "Fortalecimiento democratico"
+            #Ya que aparece con capitalizacion distinta en las dos transcripciones
+            #Y tratar todo en minuscula resultaria en falsos positivos
+            if n == "Fortalecimiento democrático":
+                titulo = texto_discurso_6[fin_categoria_anterior:].find("Fortalecimiento Democrático")
+            else:
+                raise(Exception("No se encuentra titulo: "+n))
 
         #para cada categoria obtenemos comienzos y fin
-        categorias[n]["Comienzo_titulo"] = texto_discurso_6.find(n)
+        categorias[n]["Comienzo_titulo"] = titulo + fin_categoria_anterior - 1
         categorias[n]["Comienzo_sec"] = categorias[n]["Comienzo_titulo"] + len(n)
+
+        #Si es la ultima categoria, el fin es el ultimo caracter
         if n == nombres_categorias[-1]:
             categorias[n]["Fin"] = len(texto_discurso_6) - 1
         else:
-            categorias[n]["Fin"] = texto_discurso_6.find(nombres_categorias[nombres_categorias.index(n)+1])-1
+        #Si no lo es, el fin es el comienzo de la proxima categoria
+            fin = texto_discurso_6[categorias[n]["Comienzo_sec"]:].find(nombres_categorias[i+1])
+            if fin == -1:
+                if nombres_categorias[i+1] == "Fortalecimiento democrático":
+                    fin = texto_discurso_6[categorias[n]["Comienzo_sec"]:].find("Fortalecimiento Democrático")
+                else:
+                    raise(Exception("No se encuentra siguiente titulo"+nombres_categorias[i+1]))
+            categorias[n]["Fin"] = fin + categorias[n]["Comienzo_sec"] -1
 
         #Obtenemos el campo texto, separando el texto segun los comienzos y fines
         categorias[n]["Texto"] = texto_discurso_6[categorias[n]["Comienzo_sec"]:categorias[n]["Fin"]]
