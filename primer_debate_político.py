@@ -96,3 +96,7 @@ matriz_comparativa(desarrollo_seg_der,"SEGURIDAD Y DERECHOS HUMANOS: palabras co
 desarrollo_fort_dem = dicc_por_seccion['Fortalecimiento democrático']['Diccionario']
 preprocesamiento_coseno(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: similitud candidatos por distancia del coseno")
 matriz_comparativa(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: palabras compartidas entre candidatos")
+
+###########################################################
+################ ANÁLISIS DE SENTIMIENTO ##################
+sentimiento_oraciones(dicc_por_seccion)
