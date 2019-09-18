@@ -468,7 +468,6 @@ def leer_archivo_separado():
 #a sus equivalentes de palabras, y así sucesivamente
 
 def remove_non_ascii(words):
-    """Eliminar caracteres no ASCII de la lista de palabras en token"""
     new_words = []
     for word in words:
         new_word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore').decode('utf-8', 'ignore')
@@ -476,7 +475,7 @@ def remove_non_ascii(words):
     return new_words
 
 def to_lowercase(words):
-    """Convierte todos los caracteres a minúsculas de la lista de palabras tokenizadas"""
+    #Convierte todos los caracteres a minúsculas de la lista de palabras tokenizadas
     new_words = []
     for word in words:
         new_word = word.lower()
@@ -484,7 +483,7 @@ def to_lowercase(words):
     return new_words
 
 def remove_punctuation(words):
-    """Eliminar puntuación de la lista de palabras tokenizadas"""
+    #Eliminar puntuación de la lista de palabras tokenizadas
     new_words = []
     for word in words:
         new_word = re.sub(r'[^\w\s]', '', word)
@@ -493,7 +492,7 @@ def remove_punctuation(words):
     return new_words
 
 def replace_numbers(words):
-    """Reemplace todas las apariciones de enteros en la lista de palabras tokenizadas con representación textual"""
+    #Reemplace todas las apariciones de enteros en la lista de palabras tokenizadas con representación textual
     p = inflect.engine()
     new_words = []
     for word in words:
@@ -505,7 +504,7 @@ def replace_numbers(words):
     return new_words
 
 def remove_stopwords(words):
-    """Eliminar palabras de parada de la lista de palabras en token"""
+    #Eliminar palabras de parada de la lista de palabras en token
     new_words = []
     for word in words:
         if word not in stopwords.words('english'):
@@ -513,7 +512,7 @@ def remove_stopwords(words):
     return new_words
 
 def stem_words(words):
-    """Stem words in list of tokenized words"""
+    #Stem words in list of tokenized words
     stemmer = LancasterStemmer()
     stems = []
     for word in words:
@@ -522,7 +521,7 @@ def stem_words(words):
     return stems
 
 def lemmatize_verbs(words):
-    """Lemmatize verbs in list of tokenized words"""
+    #Lemmatize verbs in list of tokenized words
     lemmatizer = WordNetLemmatizer()
     lemmas = []
     for word in words:
