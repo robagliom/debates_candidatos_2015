@@ -47,7 +47,7 @@ def grafico_barras(datos):
 
         #Creamos un arreglo que tendra todos los datos de positividad de todos los candidatos, uno detras del otro
         datos_totales = []
-        #Y un arreglo con la cantidad de oraciones dichas por cada candidato (acumulativo), 
+        #Y un arreglo con la cantidad de oraciones dichas por cada candidato (acumulativo),
         #para saber donde comienza y termina cada uno
         largos = [0]
 
@@ -68,7 +68,7 @@ def grafico_barras(datos):
             print(datos[cat][candidato][-3])
             datos_totales += datos[cat][candidato]
             #TODO: checkear que esto este bien
-            largos.append(len(datos[cat][candidato]) + largos[-1])      
+            largos.append(len(datos[cat][candidato]) + largos[-1])
             #Creamos la linea horizontal de promedio para ese candidato
             plt.hlines(y=np.mean(datos[cat][candidato]), xmin=largos[-2], xmax=largos[-1], linewidth=1, color='black')
             plt.hlines(y=np.median(datos[cat][candidato]), xmin=largos[-2], xmax=largos[-1], linewidth=1, color='blue')
@@ -87,7 +87,7 @@ def grafico_barras(datos):
             #Agregamos el candidato a la leyenda
             #TODO: comprobar que las leyendas coinciden con candidatos
             legend_elements.append(Patch(facecolor=c, edgecolor=c,label=candidatos[4-len(colores)]))
-            
+
 
         #Titulo, leyenda, xticks,yticks
         plt.title(str("Sentimientos en categoría "+cat))
