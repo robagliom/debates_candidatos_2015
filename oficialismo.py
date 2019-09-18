@@ -45,4 +45,5 @@ def buscar_oraciones(archivo):
     print(dic_oraciones)
     return dic_oraciones
 
+#primer debate octubre 2015
 buscar_oraciones(archivo)
