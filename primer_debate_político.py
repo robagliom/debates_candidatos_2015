@@ -8,12 +8,10 @@ from test_legibilidad import *
 from matriz_candidatos import *
 from distancia_coseno import *
 from combinaciones import *
-from analisis_sentimiento import *
 ########### Fin módulos ##############
+
 diccionario = leer_archivo() #Módulo específico
 
-#TODO: uncomment
-"""
 for i in diccionario:
     print('Cantidad de palabras dichas por',i,': ',len(diccionario[i]),'\n')
 
@@ -73,13 +71,12 @@ plot_wordcloud(palabras_stolbizer,'RODRÍGUEZ SAÁ')
 #COMENTADO HASTA VER ALGO TEÓRICO QUE JUSTIFIQUE
 #test_legibilidad(diccionario)
 
-"""
+
 ###########################################################
 ######### ANÁLISIS DISCURSO SEPARADO POR SECCIÓN ##########
 print('** Realizamos análisis separado por sección **')
 dicc_por_seccion = leer_archivo_separado()
-#TODO: uncomment
-"""
+
 ######### SECCIÓN: DESARROLLO ECONÓMICO Y HUMANO ##########
 desarrollo_eco_hum = dicc_por_seccion['Desarrollo económico y humano']['Diccionario']
 preprocesamiento_coseno(desarrollo_eco_hum,"DESARROLLO ECONÓMICO Y HUMANO: similitud candidatos por distancia del coseno")
@@ -99,7 +96,6 @@ matriz_comparativa(desarrollo_seg_der,"SEGURIDAD Y DERECHOS HUMANOS: palabras co
 desarrollo_fort_dem = dicc_por_seccion['Fortalecimiento democrático']['Diccionario']
 preprocesamiento_coseno(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: similitud candidatos por distancia del coseno")
 matriz_comparativa(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: palabras compartidas entre candidatos")
-"""
 
 ###########################################################
 ################ ANÁLISIS DE SENTIMIENTO ##################
