@@ -5,18 +5,20 @@
 from preprocesamiento import *
 from analisis import *
 
-archivo = leer_archivo()
-#print(archivo)
+primer_debate = leer_archivo("datos/Version-taquigrafica.pdf")
+segundo_debate = leer_archivo("datos/ArgentinaDebate_2.pdf")
 
-def buscar_palabras(archivo):
+#print(primer_debate)
+
+def buscar_palabras(primer_debate):
     with open('oficialismo/nombres_oficialismo.txt', 'r') as f:
         palabras_oficialismo = [linea.replace('\n','') for linea in f]
 
     oficialismo = {}
-    for candidato in archivo.keys():
+    for candidato in primer_debate.keys():
         lista = []
         #print(candidato)
-        palabras = tokenizacion(archivo[candidato])
+        palabras = tokenizacion(primer_debate[candidato])
         #print(palabras)
         for word in palabras:
             #print(word)
@@ -29,12 +31,12 @@ def buscar_palabras(archivo):
     return oficialismo
 
 #Recibe diccionario con lo que dijo cada candidato
-def buscar_oraciones(archivo):
+def buscar_oraciones(primer_debate):
     dic_oraciones = {}
-    oficialismo = buscar_palabras(archivo)
-    for candidato in archivo.keys():
+    oficialismo = buscar_palabras(primer_debate)
+    for candidato in primer_debate.keys():
         lista_candidato = []
-        oraciones = archivo[candidato].split('.')
+        oraciones = primer_debate[candidato].split('.')
         palabras_candidato = set(oficialismo[candidato])
         for oracion in oraciones:
             for palabra in palabras_candidato:
@@ -43,7 +45,11 @@ def buscar_oraciones(archivo):
 
         dic_oraciones[candidato] = lista_candidato
     print(dic_oraciones)
-    return dic_oraciones
+    return dic_oraciones,oficialismo
 
 #primer debate octubre 2015
-buscar_oraciones(archivo)
+oraciones_primer_debate=buscar_oraciones(primer_debate)
+oraciones_segundo_debate=buscar_oraciones(segundo_debate)
+
+print('PRIMER DEBATE',oraciones_primer_debate)
+print('SEGUNDO DEBATE',oraciones_segundo_debate)
