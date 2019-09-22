@@ -13,7 +13,8 @@ from nltk.corpus import stopwords
 from nltk.stem import LancasterStemmer, WordNetLemmatizer
 from nltk.probability import FreqDist
 from nltk import tokenize
-
+#Para transformar números a texto en español
+from num2words import num2words
 #Importar modulo de lectura de pypdf
 from PyPDF2 import PdfFileReader
 
@@ -117,7 +118,7 @@ def leer_archivo_separado(path):
     for i in range(len(nombres_categorias)):
         n = nombres_categorias[i]
         categorias[n] = {"Comienzo_titulo":0, "Comienzo_sec":0,"Fin":0,"Texto":[],"Diccionario":{},"Oraciones":{}}
-        
+
         #Obtenemos el fin de la categoria anterior
         fin_categoria_anterior = 0
         if i > 0:
@@ -210,7 +211,10 @@ def remove_non_ascii(words):
     """Eliminar caracteres no ASCII de la lista de palabras en token"""
     new_words = []
     for word in words:
-        new_word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+        if 'ñ' in word:
+            new_word = word
+        else:
+            new_word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore').decode('utf-8', 'ignore')
         new_words.append(new_word)
     return new_words
 
@@ -233,12 +237,13 @@ def remove_punctuation(words):
 
 def replace_numbers(words):
     """Reemplace todas las apariciones de enteros en la lista de palabras tokenizadas con representación textual"""
-    p = inflect.engine()
+    #p = inflect.engine()
     new_words = []
     for word in words:
         if word.isdigit():
-            new_word = p.number_to_words(word)
+            new_word = num2words(word, lang='es')#p.number_to_words(word)
             new_words.append(new_word)
+            print('Reemplazo numeros',word,new_word)
         else:
             new_words.append(word)
     return new_words
@@ -247,7 +252,7 @@ def remove_stopwords(words):
     """Eliminar palabras de parada de la lista de palabras en token"""
     new_words = []
     for word in words:
-        if word not in stopwords.words('english'):
+        if word not in stopwords.words('spanish'):
             new_words.append(word)
     return new_words
 
@@ -268,7 +273,7 @@ def lemmatize_verbs(words):
         lemma = lemmatizer.lemmatize(word, pos='v')
         lemmas.append(lemma)
     return lemmas
-  
+
 def remove_adverbios(words):
     print('remove_adverbios')
     with open('lenguaje_español/adverbios.txt', 'r') as f:
@@ -300,7 +305,7 @@ def remove_preposiciones(words):
     for word in words:
         if not word in preposiciones:
             sin_preposiciones.append(word)
-    return sin_preposiciones  
+    return sin_preposiciones
 
 def normalize(words):
     words = remove_non_ascii(words)
@@ -310,7 +315,7 @@ def normalize(words):
     words = remove_stopwords(words)
     words = remove_adverbios(words)
     words = remove_conjunciones(words)
-    words = remove_preposiciones(words)    
+    words = remove_preposiciones(words)
     return words
 
 def stem_and_lemmatize(words):
