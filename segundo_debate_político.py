@@ -76,4 +76,4 @@ desarrollo_fort_dem = dicc_por_seccion['Fortalecimiento democrático']['Dicciona
 #preprocesamiento_coseno2(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: similitud candidatos por distancia del coseno")
 #matriz_comparativa(desarrollo_fort_dem,"FORTALECIMIENTO DEMOCRÁTICO: palabras compartidas entre candidatos")
 
-comparacion_macri(leer_archivo_separado("datos/Version-taquigrafica.pdf"),dicc_por_seccion,"Relativo")
+palabras_distintas(leer_archivo_separado("datos/Version-taquigrafica.pdf"),dicc_por_seccion)
